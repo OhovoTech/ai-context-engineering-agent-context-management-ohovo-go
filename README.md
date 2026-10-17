@@ -88,8 +88,6 @@ This saves a very long text outside and gives back only a short pointer.
 
 Copy the code below and paste it into the same chat.
 
-Python
-
 ```
 store= PointerStore()
 pointer= store.store("Very long document or log..." * 200,summary="Important log")
@@ -112,8 +110,6 @@ This makes long text shorter while keeping the important meaning.
 
 Copy the code below and paste it into the same chat.
 
-Python
-
 ```
 short= compress_text("Long paragraph one. Long paragraph two. Final sentence.")
 print(short)
@@ -134,8 +130,6 @@ This finds only the items that match your search.
 **Where to paste?**
 
 Copy the code below and paste it into the same chat.
-
-Python
 
 ```
 items= ["dogs bark","cats sleep","birds fly"]
@@ -158,8 +152,6 @@ This gives one agent only the information it should see.
 
 Copy the code below and paste it into the same chat.
 
-Python
-
 ```
 context= {"agent_a":"plan A","agent_b":"plan B","shared":"common info"}
 print(isolate_context(context,agent_id="agent_a"))
@@ -172,8 +164,6 @@ You will see only the information for agent_a.
 ---
 
 ## Full Example (Copy everything together & paste in chat)
-
-Python
 
 ```
 from context_engineering_kitimport PointerStore, compress_text, select_relevant, isolate_context
