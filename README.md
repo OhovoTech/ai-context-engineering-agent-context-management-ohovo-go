@@ -68,8 +68,6 @@ This loads all the context tools so you can use them.
 
 Copy the code below and paste it into the same chat.
 
-Python
-
 ```
 from context_engineering_kitimport PointerStore, compress_text, select_relevant, isolate_context
 ```
