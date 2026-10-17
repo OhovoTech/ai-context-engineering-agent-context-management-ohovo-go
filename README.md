@@ -1,4 +1,4 @@
-# Context Engineering - Agent Context Management Ohovo Contooxt Go
+# Context Engineering - Agent Context Management Ohovo Context Go
 
 **Simple Context Engineering Tool for AI Agents**
 
