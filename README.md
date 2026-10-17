@@ -8,12 +8,6 @@ It lets agents save large information outside, choose only useful parts, make te
 
 It solves the problem of AI agents becoming slow when they have too much information.
 
-!License
-
-!Python 3.10+
-
-!Local-first
-
 ## What is this tool?
 
 This is a free Python tool that helps control context.
@@ -179,7 +173,7 @@ You will see only the information for agent_a.
 
 ---
 
-## Full Example (Copy everything together)
+## Full Example (Copy everything together & paste in chat)
 
 Python
 
