@@ -1,88 +1,209 @@
-# Ohovo Contextoo – Context Engineering Kit for AI Agents
+# Context Engineering - Agent Context Management Ohovo Contooxt Go
 
-**Lightweight tools to externalize, select, compress, and isolate context for AI agents.**  
-Prevents context bloat and “lost in the middle” problems.
+**Simple Context Engineering Tool for AI Agents**
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![Local-first](https://img.shields.io/badge/local--first-yes-brightgreen.svg)](#)
+This tool helps AI agents manage their context better.
 
-## What is Ohovo Contextoo?
+It lets agents save large information outside, choose only useful parts, make text shorter, and keep different agents separate.
 
-Ohovo Contextoo (package name: `context-engineering-kit`) gives you simple, fast primitives that implement the classic context-engineering pattern:
+It solves the problem of AI agents becoming slow when they have too much information.
 
-- **Externalize** – store large content outside the prompt and keep only a pointer (`PointerStore`)
-- **Select** – keep only the most relevant pieces (`select_relevant`)
-- **Compress** – shorten text while preserving meaning (`compress_text`)
-- **Isolate** – give different agents their own clean context views (`isolate_context`)
+!License
 
-Everything runs locally with zero required external services and virtually no lag.
+!Python 3.10+
 
-## Compatible AI Models & Frameworks
+!Local-first
 
-Works with any model or agent that can call Python functions:
+## What is this tool?
 
-- Claude / Claude Code
-- GPT-4o, o-series / Codex
-- Grok, Gemini
-- Local models (Ollama, llama.cpp, vLLM…)
-- LangGraph, CrewAI, AutoGen, Cursor, OpenHands, custom agents
+This is a free Python tool that helps control context.
 
-## Installation
+It works with Claude, ChatGPT, Grok, Gemini, Cursor, and any tool that can run Python.
+
+## Who can use it?
+
+Anyone who uses AI agents and wants better context control.
+
+## Compatible with
+
+- Claude
+- ChatGPT
+- Grok
+- Gemini
+- Cursor
+- Google Colab
+- Any tool that can run Python code
+
+---
+
+## How to use this tool (Very Easy Steps)
+
+You do **not** need to create any file.
+
+Just copy and paste the code directly into the chat.
+
+---
+
+### Step 1: Install the tool
+
+**What this does?**
+
+This installs the context tool.
+
+**Where to paste?**
+
+Copy the code below and paste it into your AI chat (Claude, ChatGPT, Cursor, etc.), then press Enter.
 
 ```bash
 pip install -e .
-# later: pip install ohovo-contextoo
 ```
 
-## Quick Start
+**What you will see?**
 
-```python
-from context_engineering_kit import PointerStore, compress_text, select_relevant, isolate_context
+The tool will start installing. Wait until it finishes.
 
-# 1. Externalize large content → get a short pointer
-store = PointerStore(root=".pointers")
-big_content = "Very long log or document..." * 500
-pointer = store.store(big_content, summary="Large log containing important error")
+---
+
+### Step 2: Load the tools
+
+**What this does?**
+
+This loads all the context tools so you can use them.
+
+**Where to paste?**
+
+Copy the code below and paste it into the same chat.
+
+Python
+
+```
+from context_engineering_kitimport PointerStore, compress_text, select_relevant, isolate_context
+```
+
+**What you will see?**
+
+Nothing special. It just loads the tools silently.
+
+---
+
+### Step 3: Externalize large content
+
+**What this does?**
+
+This saves a very long text outside and gives back only a short pointer.
+
+**Where to paste?**
+
+Copy the code below and paste it into the same chat.
+
+Python
+
+```
+store= PointerStore()
+pointer= store.store("Very long document or log..." * 200,summary="Important log")
 print(pointer)
-# {'pointer': 'ptr_...', 'summary': '...', 'length': ..., 'hint': '...'}
+```
 
-# 2. Compress text
-short = compress_text("Sentence one. Sentence two is longer and has more words. Final.", max_sentences=2)
+**What you will see?**
+
+You will see a short pointer instead of the long text.
+
+---
+
+### Step 4: Compress text
+
+**What this does?**
+
+This makes long text shorter while keeping the important meaning.
+
+**Where to paste?**
+
+Copy the code below and paste it into the same chat.
+
+Python
+
+```
+short= compress_text("Long paragraph one. Long paragraph two. Final sentence.")
+print(short)
+```
+
+**What you will see?**
+
+You will see a shorter version of the text.
+
+---
+
+### Step 5: Select relevant items
+
+**What this does?**
+
+This finds only the items that match your search.
+
+**Where to paste?**
+
+Copy the code below and paste it into the same chat.
+
+Python
+
+```
+items= ["dogs bark","cats sleep","birds fly"]
+print(select_relevant("dog", items))
+```
+
+**What you will see?**
+
+You will see only the item related to “dog”.
+
+---
+
+### Step 6: Isolate context for one agent
+
+**What this does?**
+
+This gives one agent only the information it should see.
+
+**Where to paste?**
+
+Copy the code below and paste it into the same chat.
+
+Python
+
+```
+context= {"agent_a":"plan A","agent_b":"plan B","shared":"common info"}
+print(isolate_context(context,agent_id="agent_a"))
+```
+
+**What you will see?**
+
+You will see only the information for agent_a.
+
+---
+
+## Full Example (Copy everything together)
+
+Python
+
+```
+from context_engineering_kitimport PointerStore, compress_text, select_relevant, isolate_context
+
+store= PointerStore()
+pointer= store.store("Very long document or log..." * 200,summary="Important log")
+print(pointer)
+
+short= compress_text("Long paragraph one. Long paragraph two. Final sentence.")
 print(short)
 
-# 3. Select only relevant items
-items = ["dogs bark loudly", "cats are fluffy", "the weather is rainy today"]
-relevant = select_relevant("dog bark", items)
-print(relevant)
+items= ["dogs bark","cats sleep","birds fly"]
+print(select_relevant("dog", items))
 
-# 4. Isolate context per agent
-full_context = {"agent_a_plan": "do X", "agent_b_plan": "do Y", "shared_ptr": "ptr_123"}
-isolated = isolate_context(full_context, agent_id="agent_a", keep_shared=True)
-print(isolated)
+context= {"agent_a":"plan A","agent_b":"plan B","shared":"common info"}
+print(isolate_context(context,agent_id="agent_a"))
 ```
 
-## How to Use – User Guide
-
-### Externalize (PointerStore)
-Store large blobs outside the prompt. The agent receives only a short pointer + summary. Load the full content later only when needed with `store.load(pointer_id)`.
-
-### Compress
-Simple extractive compression that keeps the most important sentences. Useful before sending tool outputs into the context window.
-
-### Select
-Rank a list of strings by relevance to a query (keyword overlap). Fast and dependency-free.
-
-### Isolate
-Give each agent its own filtered view of a shared context dictionary so agents do not see each other’s private keys.
-
-## Why Ohovo Contextoo?
-
-- Implements the proven “externalize / select / compress / isolate” pattern
-- Zero lag, pure Python
-- Perfect companion to any agent memory system
-- Ready for future paid model-specific optimizers
+---
 
 ## License
 
 Apache-2.0
+
+Free for personal and commercial use.
